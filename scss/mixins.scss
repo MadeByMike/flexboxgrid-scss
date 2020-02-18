@@ -1,0 +1,74 @@
+@function strip-unit($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+// Convert pixel units to rem/em (rem by default)
+@function rem($value, $context: 16, $type: rem) {
+  $unit: unit($value);
+
+  @if (unitless($value)) {
+    $value: $value * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @if (($unit == em or $unit == rem) and $unit != $type) {
+    $value: (strip-unit($value) * $context);
+  }
+
+  $return: $value / $context * 1rem;
+
+  @if ($type == em) {
+    $return: $value / $context * 1em;
+  }
+
+  @return $return;
+}
+
+// A convenience method for setting em
+@function em($value, $context: 16) {
+  @return rem($value, $context, em);
+}
+
+// Breakpoints
+// Ideally these are always in EM as they will respond to zoom
+$bp-narrow: em(640px);
+$bp-mid: em(768px); // 48
+$bp-large: em(1024px); // 64
+$bp-wide: em(1280px); // 80
+$bp-extra-wide: em(1920px); // 1080p
+$bp-omg-wide: em(3840px); // 4k +
+
+@mixin bp($point, $media-type: screen) {
+  @if $point == narrow {
+    @media #{$media-type} and (min-width: #{$bp-narrow}) {
+      @content;
+    }
+  } @else if $point == mid {
+    @media #{$media-type} and (min-width: #{$bp-mid}) {
+      @content;
+    }
+  } @else if $point == large {
+    @media #{$media-type} and (min-width: #{$bp-large}) {
+      @content;
+    }
+  } @else if $point == wide {
+    @media #{$media-type} and (min-width: #{$bp-wide}) {
+      @content;
+    }
+  } @else if $point == extra-wide {
+    @media #{$media-type} and (min-width: #{$bp-extra-wide}) {
+      @content;
+    }
+  } @else if $point == omg-wide {
+    @media (min-width: #{$bp-omg-wide}) {
+      @content;
+    }
+  } @else {
+    @media (min-width: #{$point}) {
+      @content;
+    }
+  }
+}
