@@ -1,6 +1,6 @@
 # Flexbox Grid (SCSS)
 
-[flexboxgrid.com](http://flexboxgrid.com)
+[DEMO](https://flexbox-grid-scss.netlify.com/)
 
 This is an SCSS implementation of Kristofer Joseph's [http://flexboxgrid.com/](http://flexboxgrid.com/).
 Full credit belongs to Kristofer.
