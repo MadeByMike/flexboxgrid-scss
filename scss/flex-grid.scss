@@ -4,7 +4,7 @@
 // We don't want them to change between grid instances
 $gutter-width: 4rem;
 $outer-margin: 8rem;
-$half-gutter-width: $gutter-width * 0.25;
+$half-gutter-width: $gutter-width * 0.5;
 $gutter-compensation: $half-gutter-width * -1;
 $container-sm: rem($bp-mid) + $gutter-width;
 $container-md: rem($bp-large) + $gutter-width;
